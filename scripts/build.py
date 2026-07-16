@@ -516,7 +516,10 @@ def render_pages(site_dir: Path, tokens: dict, industry: str) -> list[Path]:
     css_base = base / "styles.css"
     css_src = css_industry if css_industry.exists() else css_base
     if css_src.exists():
-        (site_dir / "styles.css").write_text(css_src.read_text(encoding="utf-8"), encoding="utf-8")
+        css_text = css_src.read_text(encoding="utf-8")
+        for k, v in tokens.items():
+            css_text = css_text.replace("{{" + k + "}}", str(v))
+        (site_dir / "styles.css").write_text(css_text, encoding="utf-8")
 
     # JS for open-now indicator
     js_base = base / "open-now.js"
@@ -534,12 +537,12 @@ def render_pages(site_dir: Path, tokens: dict, industry: str) -> list[Path]:
 
 
 def lint_pages(site_dir: Path) -> list[str]:
-    """Find any {{TOKEN}} left literal in shipped HTML. Returns list of stragglers."""
+    """Find any {{TOKEN}} left literal in shipped HTML + CSS. Returns list of stragglers."""
     bad = []
-    for html in site_dir.glob("*.html"):
-        text = html.read_text(encoding="utf-8")
+    for path in sorted(list(site_dir.glob("*.html")) + list(site_dir.glob("*.css"))):
+        text = path.read_text(encoding="utf-8")
         for m in re.findall(r"\{\{([A-Z_0-9]+)\}\}", text):
-            bad.append(f"{html.name}: {{{{{m}}}}} still literal")
+            bad.append(f"{path.name}: {{{{{m}}}}} still literal")
     return bad
 
 

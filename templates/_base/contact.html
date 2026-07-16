@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
   <title>Contact — {{NAME}}</title>
   <meta name="description" content="Get in touch with {{NAME}}: WhatsApp, phone, directions." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,5 +118,12 @@
     </div>
   </footer>
   <script src="open-now.js" defer></script>
+  <!-- =================== MOBILE STICKY CTA =================== -->
+  <div class="mobile-cta" role="navigation" aria-label="Quick actions">
+    <div class="mobile-cta__inner">
+      <a class="btn btn--whatsapp" href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="btn btn--secondary" href="tel:{{PHONE_RAW}}">📞 Call</a>
+    </div>
+  </div>
 </body>
 </html>

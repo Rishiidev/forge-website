@@ -13,6 +13,9 @@
   --font-heading: {{FONT_HEADING}}, Georgia, serif;
   --font-body: {{FONT_BODY}}, -apple-system, system-ui, sans-serif;
   --max-width: 1140px;
+  /* Safe areas for notched / home-indicator devices */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,20 +27,28 @@ body {
   line-height: 1.55;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
+  /* Pad bottom to clear the sticky mobile CTA bar (~64px + iPhone indicator) */
+  padding-bottom: calc(80px + var(--safe-bottom));
+  overflow-x: hidden;
 }
+@media (min-width: 769px) { body { padding-bottom: 0; } }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--primary); text-decoration: none; }
+a { color: var(--primary); text-decoration: none; -webkit-tap-highlight-color: transparent; }
 a:hover { text-decoration: underline; }
+*:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+*:focus:not(:focus-visible) { outline: none; }
 
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 22px; }
 h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; line-height: 1.18; letter-spacing: -0.01em; }
-h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: 16px; }
-h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 18px; }
+h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin-bottom: 14px; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); margin-bottom: 14px; }
 h3 { font-size: 1.25rem; margin-bottom: 8px; }
 
-.section { padding: 72px 0; }
+.section { padding: 48px 0; }
+@media (min-width: 768px) { .section { padding: 72px 0; } }
 .section--alt { background: var(--surface); }
-.section__head { text-align: center; margin-bottom: 44px; }
+.section__head { text-align: center; margin-bottom: 32px; }
+@media (min-width: 768px) { .section__head { margin-bottom: 44px; } }
 .section__head p { color: var(--muted); max-width: 640px; margin: 0 auto; }
 
 /* ─── Nav ───────────────────────────────────────── */
@@ -45,25 +56,50 @@ h3 { font-size: 1.25rem; margin-bottom: 8px; }
   position: sticky; top: 0; z-index: 50;
   background: rgba(252, 250, 247, 0.92);
   backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; gap: 20px; }
-.nav__brand { font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; color: var(--ink); }
+.nav__brand { font-family: var(--font-heading); font-weight: 700; font-size: 1.2rem; color: var(--ink); white-space: nowrap; max-width: 60vw; overflow: hidden; text-overflow: ellipsis; }
 .nav__brand:hover { text-decoration: none; }
 .nav__links { display: none; gap: 24px; list-style: none; }
 .nav__links a { color: var(--ink); font-size: 0.95rem; }
 .nav__links a:hover { color: var(--primary); text-decoration: none; }
 .nav__cta { display: inline-flex; }
-.nav__hamburger { background: none; border: 0; padding: 6px; cursor: pointer; color: var(--ink); }
+.nav__hamburger {
+  background: none; border: 0; padding: 8px 10px; cursor: pointer;
+  color: var(--ink); font-size: 1.4rem; line-height: 1;
+  min-width: 44px; min-height: 44px;     /* WCAG touch target */
+  display: inline-flex; align-items: center; justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Tight nav at <480px: hide the nav CTA, brand stays. Hamburger only on the right. */
+@media (max-width: 479px) {
+  .nav__inner { padding: 12px 16px; gap: 10px; }
+  .nav__brand { font-size: 1.05rem; }
+  .nav__cta { display: none; }
+}
 @media (min-width: 768px) {
   .nav__links { display: flex; }
   .nav__hamburger { display: none; }
 }
-.nav__menu { display: none; background: var(--surface); border-top: 1px solid var(--line); padding: 12px 22px; }
+.nav__menu {
+  display: none; background: var(--surface); border-top: 1px solid var(--line);
+  padding: 12px 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+}
 .nav__menu.is-open { display: block; }
 .nav__menu ul { list-style: none; }
-.nav__menu li { padding: 10px 0; border-bottom: 1px solid var(--line); }
-.nav__menu a { color: var(--ink); }
+.nav__menu li {
+  padding: 14px 4px; border-bottom: 1px solid var(--line);
+  min-height: 48px; display: flex; align-items: center;   /* ≥44px tap target */
+}
+.nav__menu li:last-child { border-bottom: 0; }
+.nav__menu a { color: var(--ink); flex: 1; -webkit-tap-highlight-color: transparent; }
+.nav__menu .nav__menu-cta {
+  display: block; margin-top: 8px;
+  background: #25d366; color: white; padding: 14px 18px;
+  border-radius: 12px; text-align: center; font-weight: 600;
+}
 @media (min-width: 768px) { .nav__menu { display: none !important; } }
 
 /* ─── Buttons ───────────────────────────────────── */
@@ -84,12 +120,19 @@ h3 { font-size: 1.25rem; margin-bottom: 8px; }
 .btn--whatsapp:hover { background: #1ea952; }
 
 /* ─── Hero ──────────────────────────────────────── */
-.hero { padding: 64px 0 60px; background: linear-gradient(180deg, var(--primary-soft) 0%, var(--bg) 100%); }
-.hero__inner { display: grid; gap: 36px; }
-.hero__badges { display: flex; align-items: center; gap: 14px; margin: 14px 0 22px; flex-wrap: wrap; }
+.hero { padding: 48px 0 40px; background: linear-gradient(180deg, var(--primary-soft) 0%, var(--bg) 100%); }
+.hero__inner { display: grid; gap: 28px; }
+.hero__badges { display: flex; align-items: center; gap: 12px; margin: 14px 0 22px; flex-wrap: wrap; }
 .hero__rating { display: inline-flex; align-items: center; gap: 6px; background: white; padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.92rem; }
 .hero__rating-stars { color: #f5a623; letter-spacing: 1px; }
-.hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.hero__cta {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px;
+}
+/* Stack vertically & full-width below 560px so the labels never truncate. */
+@media (max-width: 559px) {
+  .hero__cta { flex-direction: column; }
+  .hero__cta .btn { width: 100%; min-height: 52px; }
+}
 .hero__photo { border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
 .hero__photo-placeholder {
   border-radius: var(--radius); box-shadow: var(--shadow);
@@ -175,3 +218,26 @@ h3 { font-size: 1.25rem; margin-bottom: 8px; }
 .footer a { color: #d2d2d2; }
 .footer a:hover { color: white; }
 .footer__bottom { border-top: 1px solid #2a2a2a; padding-top: 22px; font-size: 0.85rem; color: #888; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* ─── Mobile sticky bottom CTA ────────────────── */
+/* Always-visible WhatsApp + Call bar. Hidden on ≥769px where the nav has CTA. */
+.mobile-cta {
+  display: none;
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border-top: 1px solid var(--line);
+  padding: 10px 12px calc(10px + var(--safe-bottom));
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+.mobile-cta__inner {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 8px;
+  max-width: var(--max-width); margin: 0 auto;
+}
+.mobile-cta .btn {
+  min-height: 48px; border-radius: 12px; padding: 10px 12px;
+  font-weight: 600;
+}
+@media (max-width: 768px) { .mobile-cta { display: block; } }
