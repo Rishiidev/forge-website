@@ -654,6 +654,7 @@ def main() -> int:
         "CTA_SECONDARY": SECONDARY_CTA[industry],
         "COLOR_PRIMARY": COLOR_PRIMARY[industry],
         "FONT_HEADING": FONT_HEADING[industry],
+        "FONT_HEADING_ENCODED": urllib.parse.quote(FONT_HEADING[industry]),
         "FONT_BODY": "Inter",
         "EMAIL": build_email_block(signals.get("email", "")),       # <li>...</li> for footer
         "EMAIL_BTN": (
