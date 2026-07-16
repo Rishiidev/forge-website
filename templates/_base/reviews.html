@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews — {{NAME}}</title>
+  <meta name="description" content="What customers say about {{NAME}}." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family={{FONT_HEADING}}:wght@600;700&family={{FONT_BODY}}:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+</head>
+<body data-hours='{{HOURS_JSON}}'>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand">{{NAME}}</a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--whatsapp nav__cta"
+         href="{{WHATSAPP_URL}}"
+         target="_blank" rel="noopener">{{CTA_PRIMARY}}</a>
+      <button class="nav__hamburger" aria-label="Open menu">☰</button>
+    </div>
+    <div class="nav__menu" id="navMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h1>What people say</h1>
+        <p style="font-size: 1.1rem;">{{RATING}} ★ from {{REVIEW_COUNT}} reviews on Google.</p>
+        <div style="margin-top: 18px;">
+          {{STARS_HTML}}
+        </div>
+      </div>
+      <div class="reviews-grid">
+{{REVIEW_CARDS}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>Why customers return</h2>
+        <p>The same reasons show up across hundreds of reviews.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card"><h3 class="service-card__title">Consistent quality</h3><p class="service-card__desc">Whether it's your first visit or your fiftieth, you get the same standard of work.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Fair, transparent pricing</h3><p class="service-card__desc">We quote before we start. No surprises, no hidden fees, no upsells.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Genuinely fast</h3><p class="service-card__desc">Same-day where possible. Next-day for everything else. We respect your time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="container">
+      <h2>See it for yourself</h2>
+      <p>The next review could be yours.</p>
+      <a class="btn btn--secondary" href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">💬 {{CTA_PRIMARY}}</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">{{NAME}}</div>
+          <p>{{ADDRESS}}</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:{{PHONE_RAW}}">{{PHONE}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© {{YEAR}} {{NAME}}. All rights reserved.</span>
+        <span>Crafted by <a href="https://github.com/Rishiidev/forge-website" rel="noopener">Forge</a></span>
+      </div>
+    </div>
+  </footer>
+  <script src="open-now.js" defer></script>
+</body>
+</html>

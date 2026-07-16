@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Build artifacts (don't ship per-site output)
+build/
+dist/
+*.zip
+*.tar.gz
+
+# Local config
+.env
+.env.local
+.vercel/
+.wrangler/

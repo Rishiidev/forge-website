@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{NAME}} — {{TAGLINE}}</title>
+  <meta name="description" content="{{DESCRIPTION}}" />
+  <meta property="og:title" content="{{NAME}} — {{TAGLINE}}" />
+  <meta property="og:description" content="{{DESCRIPTION}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:type" content="business.business" />
+  <meta name="theme-color" content="{{COLOR_PRIMARY}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family={{FONT_HEADING}}:wght@600;700&family={{FONT_BODY}}:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{NAME}}",
+    "description": "{{DESCRIPTION}}",
+    "telephone": "{{PHONE}}",
+    "image": "{{OG_IMAGE}}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ADDRESS}}"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{RATING}}",
+      "reviewCount": "{{REVIEW_COUNT}}"
+    },
+    "openingHoursSpecification": []
+  }
+  </script>
+</head>
+<body data-hours='{{HOURS_JSON}}'>
+  <!-- =================== NAV =================== -->
+  <nav class="nav" aria-label="Primary">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand">{{NAME}}</a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--whatsapp nav__cta"
+         href="{{WHATSAPP_URL}}"
+         target="_blank" rel="noopener">{{CTA_PRIMARY}}</a>
+      <button class="nav__hamburger" aria-label="Open menu">☰</button>
+    </div>
+    <div class="nav__menu" id="navMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="{{WHATSAPP_URL}}">{{CTA_PRIMARY}}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =================== HERO =================== -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <div>
+          <span class="open-status" data-open-pill>● Open Now</span>
+          <h1>{{NAME}}</h1>
+          <p style="font-size: 1.15rem; color: var(--muted); max-width: 520px;">{{TAGLINE}}</p>
+          <div class="hero__badges">
+            {{STARS_HTML}}
+            <span class="hero__rating"><strong>{{RATING}}</strong> · {{REVIEW_COUNT}} reviews on Google</span>
+          </div>
+          <div class="hero__cta">
+            <a class="btn btn--whatsapp"
+               href="{{WHATSAPP_URL}}"
+               target="_blank" rel="noopener">💬 {{CTA_PRIMARY}}</a>
+            <a class="btn btn--secondary" href="tel:{{PHONE_RAW}}">📞 {{CTA_SECONDARY}}</a>
+          </div>
+        </div>
+        <div>
+          {{PHOTO_1}}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =================== SERVICES (preview) =================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>What we do</h2>
+        <p>A look at the work we do every day — and what people come back for.</p>
+      </div>
+      <div class="services-grid">
+{{SERVICES_CARDS}}
+      </div>
+      <div style="text-align: center; margin-top: 36px;">
+        <a class="btn btn--primary" href="services.html">See all services →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== REVIEWS (preview) =================== -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>What people say</h2>
+        <p>Real reviews from real customers on Google.</p>
+      </div>
+      <div class="reviews-grid">
+{{REVIEW_CARDS}}
+      </div>
+      <div style="text-align: center; margin-top: 36px;">
+        <a class="btn btn--primary" href="reviews.html">Read all reviews →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CTA STRIP =================== -->
+  <section class="cta-strip">
+    <div class="container">
+      <h2>Ready to get started?</h2>
+      <p>WhatsApp is the fastest way to reach us. We respond in minutes during business hours.</p>
+      <a class="btn btn--secondary" href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+    </div>
+  </section>
+
+  <!-- =================== FOOTER =================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">{{NAME}}</div>
+          <p>{{TAGLINE}}</p>
+          <p style="margin-top: 10px;">{{ADDRESS}}</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">WhatsApp Us</a></li>
+            <li><a href="tel:{{PHONE_RAW}}">{{PHONE}}</a></li>
+            {{EMAIL}}
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© {{YEAR}} {{NAME}}. All rights reserved.</span>
+        <span>Crafted by <a href="https://github.com/Rishiidev/forge-website" rel="noopener">Forge</a></span>
+      </div>
+    </div>
+  </footer>
+  <script src="open-now.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — {{NAME}}</title>
+  <meta name="description" content="Get in touch with {{NAME}}: WhatsApp, phone, directions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family={{FONT_HEADING}}:wght@600;700&family={{FONT_BODY}}:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+</head>
+<body data-hours='{{HOURS_JSON}}'>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand">{{NAME}}</a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--whatsapp nav__cta"
+         href="{{WHATSAPP_URL}}"
+         target="_blank" rel="noopener">{{CTA_PRIMARY}}</a>
+      <button class="nav__hamburger" aria-label="Open menu">☰</button>
+    </div>
+    <div class="nav__menu" id="navMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h1>Get in touch</h1>
+        <p>Pick whichever channel is easiest for you. We respond fastest on WhatsApp.</p>
+        <div style="margin-top: 18px;">
+          <span class="open-status" data-open-pill>● Open Now</span>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h2>Talk to us</h2>
+          <div class="contact-actions">
+            <a class="btn btn--whatsapp"
+               href="{{WHATSAPP_URL}}"
+               target="_blank" rel="noopener">💬 WhatsApp Us</a>
+            <a class="btn btn--secondary" href="tel:{{PHONE_RAW}}">📞 Call {{PHONE}}</a>
+            <a class="btn btn--secondary"
+               href="https://www.google.com/maps/dir/?api=1&destination={{ADDRESS_ENCODED}}"
+               target="_blank" rel="noopener">📍 Get Directions</a>
+            {{EMAIL_BTN}}
+          </div>
+        </div>
+        <iframe class="contact-map"
+                title="Map to {{NAME}}"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q={{ADDRESS_ENCODED}}&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>Hours</h2>
+        <p>Open status shown live at the top of every page.</p>
+      </div>
+      <table class="hours-table">
+        <tbody>
+{{HOURS_ROWS}}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">{{NAME}}</div>
+          <p>{{ADDRESS}}</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="{{WHATSAPP_URL}}" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:{{PHONE_RAW}}">{{PHONE}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© {{YEAR}} {{NAME}}. All rights reserved.</span>
+        <span>Crafted by <a href="https://github.com/Rishiidev/forge-website" rel="noopener">Forge</a></span>
+      </div>
+    </div>
+  </footer>
+  <script src="open-now.js" defer></script>
+</body>
+</html>
